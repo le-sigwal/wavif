@@ -8,7 +8,7 @@
  * Author: Bagad Sigwal
  * Copyright: 2020 Sigwal.info
  * Last modification: 09/03/2020
- * Version : 20.03
+ * Version: 20.03
  *
  * Change records:
  * SWL - 09/03/2020 - creation, added main()                             */
