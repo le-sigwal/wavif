@@ -2,11 +2,11 @@
 /* File: wavif.cpp
  * Description: "Work Around aVIF" Project (AV1 Image Format)
  *                Container: HEIF (High Efficiency Image Format)
- *                  [af]
+ *                  https://github.com/nokiatech/heif
  *                Codec    : AV1
  *                  https://github.com/AOMediaCodec/av1-spec
  * Author: Bagad Sigwal
- * Copyright: 2020 Sigwal.info
+ * Copyright: 2020 Sigwal.info/github
  * Last modification: 10/03/2020
  * Version: 20.03
  *
@@ -33,7 +33,14 @@
 //-------------------------------------------------------------------------
 int avifinfo(const char *filepath){
 
+	std::cout<<">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"<<std::endl;
+	std::cout<<"[>AVIF FILE INFORMATIONS]"<<std::endl;
+	std::cout<<">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"<<std::endl;
+	std::cout<<"filepath : '"<<filepath<<"'"<<std::endl;
 	//[af]
+	std::cout<<"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"<<std::endl;
+	std::cout<<"[<AVIF FILE INFORMATIONS]"<<std::endl;
+	std::cout<<"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"<<std::endl;
 
 	return 0;
 }
