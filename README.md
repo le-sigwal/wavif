@@ -1,2 +1,2 @@
 # wavif
-Work on AVIF
+"Work Around aVIF" Project (AV1 Image Format)
