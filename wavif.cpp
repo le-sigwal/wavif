@@ -36,7 +36,7 @@ int avifinfo(const char *filepath){
 	std::cout<<">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"<<std::endl;
 	std::cout<<"[>AVIF FILE INFORMATIONS]"<<std::endl;
 	std::cout<<">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"<<std::endl;
-	std::cout<<"filepath : '"<<filepath<<"'"<<std::endl;
+	std::cout<<"filepath: '"<<filepath<<"'"<<std::endl;
 	//[af]
 	std::cout<<"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"<<std::endl;
 	std::cout<<"[<AVIF FILE INFORMATIONS]"<<std::endl;
