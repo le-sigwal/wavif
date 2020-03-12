@@ -1,11 +1,16 @@
 //-------------------------------------------------------------------------
 /* File: wavif.cpp
- * Description: "Work Around aVIF" Project (AV1 Image Format)
- *                Container: HEIF (High Efficiency Image Format)
- *                  https://github.com/nokiatech/heif
- *                Codec    : AV1
- *                  https://github.com/AOMediaCodec/av1-spec
- * Author: Bagad Sigwal
+ * Description: "Work Around aVIF" Project (AV1 Image File Format)
+ *                Container: 
+ *                  ISO-BMFF (ISO Base Media File Format)
+ *                    https://en.wikipedia.org/wiki/ISO/..
+ *                            ..IEC_base_media_file_format
+ *                  HEIF (High Efficiency Image File Format)
+ *                    https://nokiatech.github.io/heif/
+ *                Codec    : 
+ *                  AV1
+ *                    https://aomediacodec.github.io/av1-avif/
+ * Authors: Bagad Sigwal
  * Copyright: 2020 Sigwal.info/github
  * Last modification: 10/03/2020
  * Version: 20.03
