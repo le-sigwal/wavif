@@ -12,7 +12,7 @@
  *                    https://aomediacodec.github.io/av1-avif/
  * Authors: Bagad Sigwal
  * Copyright: 2020 Sigwal.info/github
- * Last modification: 16/03/2020
+ * Last modification: 18/03/2020
  * Version: 20.03
  *
  * Change records:
@@ -25,7 +25,8 @@
  *                    added avifinfo/handlerreferencebox
  *                    added avifinfo/primaryitembox
  *                    added avifinfo/itemlocationbox
- * SWL - 16/03/2020 - added avifinfo/iteminformationbox                  */
+ * SWL - 16/03/2020 - added avifinfo/iteminformationbox
+ * SWL - 18/03/2020 - added avifinfo/iteminfoentrybox                    */
 //-------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------
@@ -358,7 +359,62 @@ int avifinfo(const char *filepath){
 	}
 
 	for(itemi=0;itemi<itemn;itemi++){
-		//[af]
+		std::cout<<"      - Item Info Entry Box"<<std::endl;
+		ica=fgetc(avifile); icb=fgetc(avifile); icc=fgetc(avifile); icd=fgetc(avifile);
+		cca=(char)ica; ccb=(char)icb; ccc=(char)icc; ccd=(char)icd;
+		bhsize.cr[0]=ccd; bhsize.cr[1]=ccc; bhsize.cr[2]=ccb; bhsize.cr[3]=cca;
+		std::cout<<"        - Box header size: "<<bhsize.ui<<std::endl;
+
+		ica=fgetc(avifile); icb=fgetc(avifile); icc=fgetc(avifile); icd=fgetc(avifile);
+		cca=(char)ica; ccb=(char)icb; ccc=(char)icc; ccd=(char)icd;
+		std::cout<<"        - Box header type: '"<<cca<<ccb<<ccc<<ccd<<"'"<<std::endl;
+
+		ica=fgetc(avifile); int version=ica;
+		std::cout<<"        - Version: "<<version<<std::endl;
+		icb=fgetc(avifile); icc=fgetc(avifile); icd=fgetc(avifile);
+		ccb=(char)icb; ccc=(char)icc; ccd=(char)icd;
+		std::cout<<"        - Flags: '"<<ccb<<ccc<<ccd<<"'"<<std::endl;
+
+		// [af]
+
+		if(version>=2){
+			if(version==2){
+				uint16_o item_ID;
+				icc=fgetc(avifile); icd=fgetc(avifile); ccc=(char)icc; ccd=(char)icd;
+				item_ID.cr[0]=ccd; item_ID.cr[1]=ccc;
+				std::cout<<"        - item_ID: "<<item_ID.ui<<std::endl;
+			} else if (version==3) {
+				uint32_o item_ID;
+				ica=fgetc(avifile); icb=fgetc(avifile); icc=fgetc(avifile); icd=fgetc(avifile);
+				cca=(char)ica; ccb=(char)icb; ccc=(char)icc; ccd=(char)icd;
+				item_ID.cr[0]=ccd; item_ID.cr[1]=ccc; item_ID.cr[2]=ccb; item_ID.cr[3]=cca;
+				std::cout<<"        - item_ID: "<<item_ID.ui<<std::endl;
+			}
+
+			uint16_o item_protection_index;
+			icc=fgetc(avifile); icd=fgetc(avifile); ccc=(char)icc; ccd=(char)icd;
+			item_protection_index.cr[0]=ccd; item_protection_index.cr[1]=ccc;
+			std::cout<<"        - item_protection_index: "<<item_protection_index.ui<<std::endl;
+
+			// item_type;
+			ica=fgetc(avifile); icb=fgetc(avifile); icc=fgetc(avifile); icd=fgetc(avifile);
+			cca=(char)ica; ccb=(char)icb; ccc=(char)icc; ccd=(char)icd;
+			std::cout<<"        - item_type: '"<<cca<<ccb<<ccc<<ccd<<"'"<<std::endl;
+
+			// item_name
+			std::cout<<"        - item_name: '";
+			ica=fgetc(avifile); cca=(char)ica;
+			while(cca!='\0'){
+				std::cout<<cca;
+				ica=fgetc(avifile); cca=(char)ica;
+			}
+			std::cout<<"'"<<std::endl;
+
+			// [af]
+		}
+		else{
+			// [af]
+		}
 	}
 	//---------------------------------------------------------------------
 	//[<META BOX]
