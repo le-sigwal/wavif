@@ -12,7 +12,7 @@
  *                    https://aomediacodec.github.io/av1-avif/
  * Authors: Bagad Sigwal
  * Copyright: 2020 Sigwal.info/github
- * Last modification: 18/03/2020
+ * Last modification: 31/03/2020
  * Version: 20.03
  *
  * Change records:
@@ -26,7 +26,11 @@
  *                    added avifinfo/primaryitembox
  *                    added avifinfo/itemlocationbox
  * SWL - 16/03/2020 - added avifinfo/iteminformationbox
- * SWL - 18/03/2020 - added avifinfo/iteminfoentrybox                    */
+ * SWL - 18/03/2020 - added avifinfo/iteminfoentrybox
+ * SWL - 29/03/2020 - added avifinfo/itempropertiesbox
+ *                    added avifinfo/itempropertycontainerbox
+ *                    added avifinfo/imagespatialextents
+ *                    added avifinfo/pixelaspectratio                    */
 //-------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------
@@ -415,6 +419,153 @@ int avifinfo(const char *filepath){
 		else{
 			// [af]
 		}
+
+		std::cout<<"      - Item Properties Box"<<std::endl;
+		ica=fgetc(avifile); icb=fgetc(avifile); icc=fgetc(avifile); icd=fgetc(avifile);
+		cca=(char)ica; ccb=(char)icb; ccc=(char)icc; ccd=(char)icd;
+		bhsize.cr[0]=ccd; bhsize.cr[1]=ccc; bhsize.cr[2]=ccb; bhsize.cr[3]=cca;
+		std::cout<<"        - Box header size: "<<bhsize.ui<<std::endl;
+
+		ica=fgetc(avifile); icb=fgetc(avifile); icc=fgetc(avifile); icd=fgetc(avifile);
+		cca=(char)ica; ccb=(char)icb; ccc=(char)icc; ccd=(char)icd;
+		std::cout<<"        - Box header type: '"<<cca<<ccb<<ccc<<ccd<<"'"<<std::endl;
+
+		//
+		std::cout<<"        - Item Property Container Box"<<std::endl;
+		ica=fgetc(avifile); icb=fgetc(avifile); icc=fgetc(avifile); icd=fgetc(avifile);
+		cca=(char)ica; ccb=(char)icb; ccc=(char)icc; ccd=(char)icd;
+		bhsize.cr[0]=ccd; bhsize.cr[1]=ccc; bhsize.cr[2]=ccb; bhsize.cr[3]=cca;
+		std::cout<<"          - Box header size: "<<bhsize.ui<<std::endl;
+
+		ica=fgetc(avifile); icb=fgetc(avifile); icc=fgetc(avifile); icd=fgetc(avifile);
+		cca=(char)ica; ccb=(char)icb; ccc=(char)icc; ccd=(char)icd;
+		std::cout<<"          - Box header type: '"<<cca<<ccb<<ccc<<ccd<<"'"<<std::endl;
+
+		std::cout<<"          - Image Spatial Extents"<<std::endl;
+		ica=fgetc(avifile); icb=fgetc(avifile); icc=fgetc(avifile); icd=fgetc(avifile);
+		cca=(char)ica; ccb=(char)icb; ccc=(char)icc; ccd=(char)icd;
+		bhsize.cr[0]=ccd; bhsize.cr[1]=ccc; bhsize.cr[2]=ccb; bhsize.cr[3]=cca;
+		std::cout<<"            - Box header size: "<<bhsize.ui<<std::endl;
+
+		ica=fgetc(avifile); icb=fgetc(avifile); icc=fgetc(avifile); icd=fgetc(avifile);
+		cca=(char)ica; ccb=(char)icb; ccc=(char)icc; ccd=(char)icd;
+		std::cout<<"            - Box header type: '"<<cca<<ccb<<ccc<<ccd<<"'"<<std::endl;
+
+
+		ica=fgetc(avifile); version=ica;
+		std::cout<<"            - Version: "<<version<<std::endl;
+		icb=fgetc(avifile); icc=fgetc(avifile); icd=fgetc(avifile);
+		ccb=(char)icb; ccc=(char)icc; ccd=(char)icd;
+		std::cout<<"            - Flags: '"<<ccb<<ccc<<ccd<<"'"<<std::endl;
+
+		uint32_o width;
+		ica=fgetc(avifile); icb=fgetc(avifile); icc=fgetc(avifile); icd=fgetc(avifile);
+		cca=(char)ica; ccb=(char)icb; ccc=(char)icc; ccd=(char)icd;
+		width.cr[0]=ccd; width.cr[1]=ccc; width.cr[2]=ccb; width.cr[3]=cca;
+		std::cout<<"            - width: "<<width.ui<<std::endl;
+
+		uint32_o height;
+		ica=fgetc(avifile); icb=fgetc(avifile); icc=fgetc(avifile); icd=fgetc(avifile);
+		cca=(char)ica; ccb=(char)icb; ccc=(char)icc; ccd=(char)icd;
+		height.cr[0]=ccd; height.cr[1]=ccc; height.cr[2]=ccb; height.cr[3]=cca;
+		std::cout<<"            - height: "<<height.ui<<std::endl;
+
+		//
+		std::cout<<"          - Pixel Aspect Ratio"<<std::endl;
+		ica=fgetc(avifile); icb=fgetc(avifile); icc=fgetc(avifile); icd=fgetc(avifile);
+		cca=(char)ica; ccb=(char)icb; ccc=(char)icc; ccd=(char)icd;
+		bhsize.cr[0]=ccd; bhsize.cr[1]=ccc; bhsize.cr[2]=ccb; bhsize.cr[3]=cca;
+		std::cout<<"            - Box header size: "<<bhsize.ui<<std::endl;
+
+		ica=fgetc(avifile); icb=fgetc(avifile); icc=fgetc(avifile); icd=fgetc(avifile);
+		cca=(char)ica; ccb=(char)icb; ccc=(char)icc; ccd=(char)icd;
+		std::cout<<"            - Box header type: '"<<cca<<ccb<<ccc<<ccd<<"'"<<std::endl;
+
+		uint32_o hSpacing;
+		ica=fgetc(avifile); icb=fgetc(avifile); icc=fgetc(avifile); icd=fgetc(avifile);
+		cca=(char)ica; ccb=(char)icb; ccc=(char)icc; ccd=(char)icd;
+		hSpacing.cr[0]=ccd; hSpacing.cr[1]=ccc; hSpacing.cr[2]=ccb; hSpacing.cr[3]=cca;
+		std::cout<<"            - hSpacing: "<<hSpacing.ui<<std::endl;
+
+		uint32_o vSpacing;
+		ica=fgetc(avifile); icb=fgetc(avifile); icc=fgetc(avifile); icd=fgetc(avifile);
+		cca=(char)ica; ccb=(char)icb; ccc=(char)icc; ccd=(char)icd;
+		vSpacing.cr[0]=ccd; vSpacing.cr[1]=ccc; vSpacing.cr[2]=ccb; vSpacing.cr[3]=cca;
+		std::cout<<"            - vSpacing: "<<vSpacing.ui<<std::endl;
+
+		//
+		std::cout<<"          - AV1 Item Configuration Property"<<std::endl;
+		ica=fgetc(avifile); icb=fgetc(avifile); icc=fgetc(avifile); icd=fgetc(avifile);
+		cca=(char)ica; ccb=(char)icb; ccc=(char)icc; ccd=(char)icd;
+		bhsize.cr[0]=ccd; bhsize.cr[1]=ccc; bhsize.cr[2]=ccb; bhsize.cr[3]=cca;
+		std::cout<<"            - Box header size: "<<bhsize.ui<<std::endl;
+
+		ica=fgetc(avifile); icb=fgetc(avifile); icc=fgetc(avifile); icd=fgetc(avifile);
+		cca=(char)ica; ccb=(char)icb; ccc=(char)icc; ccd=(char)icd;
+		std::cout<<"            - Box header type: '"<<cca<<ccb<<ccc<<ccd<<"'"<<std::endl;
+
+		// marker + version
+		ica=fgetc(avifile);
+		unsigned int marker = (ica>>7); /* /!\ */
+		std::cout<<"            - marker: "<<marker<<std::endl;
+		version=(ica<<25)>>25; /* /!\ */
+		std::cout<<"            - version : "<<version <<std::endl;
+
+		// seq_profile + seq_level_idx_0
+		icb=fgetc(avifile);
+		unsigned int seq_profile = (icb>>5); /* /!\ */
+		std::cout<<"            - seq_profile: "<<seq_profile<<std::endl;
+		unsigned int seq_level_idx_0=(icb<<27)>>27; /* /!\ */
+		std::cout<<"            - seq_level_idx_0: "<<seq_level_idx_0 <<std::endl;
+
+		// seq_tier_0 + high_bitdepth + twelve_bit + monochrome +
+		//              chroma_subsampling_x + chroma_subsampling_y +
+		//              chroma_sample_position;
+		icc=fgetc(avifile); unsigned int cui=(unsigned int)icc;
+		unsigned int seq_tier_0 = (cui>>7); /* /!\ */
+		std::cout<<"            - seq_tier_0: "<<seq_tier_0<<std::endl;
+		unsigned int high_bitdepth = (cui<<25)>>31; /* /!\ */
+		std::cout<<"            - high_bitdepth: "<<high_bitdepth<<std::endl;
+		unsigned int twelve_bit = (cui<<26)>>31; /* /!\ */
+		std::cout<<"            - twelve_bit: "<<twelve_bit<<std::endl;
+		unsigned int monochrome = (cui<<27)>>31; /* /!\ */
+		std::cout<<"            - monochrome: "<<monochrome<<std::endl;
+		unsigned int chroma_subsampling_x = (cui<<28)>>31; /* /!\ */
+		std::cout<<"            - chroma_subsampling_x: "<<chroma_subsampling_x<<std::endl;
+		unsigned int chroma_subsampling_y = (cui<<29)>>31; /* /!\ */
+		std::cout<<"            - chroma_subsampling_y: "<<chroma_subsampling_y<<std::endl;
+		unsigned int chroma_sample_position = (cui<<30)>>30; /* /!\ */
+		std::cout<<"            - chroma_sample_position: "<<chroma_sample_position<<std::endl;
+
+		// reserved + initial_presentation_delay_present +
+		//            initial_presentation_delay_minus_one +
+		//            reserved
+		icd=fgetc(avifile); cui=(unsigned int)icd;
+		unsigned int reserved = (cui>>5); /* /!\ */
+		std::cout<<"            - reserved: "<<reserved<<std::endl;
+		unsigned int initial_presentation_delay_present = (cui<<27)>>31; /* /!\ */
+		std::cout<<"            - initial_presentation_delay_present: "<<
+				initial_presentation_delay_present<<std::endl;
+		if(initial_presentation_delay_present){
+			unsigned int initial_presentation_delay_minus_one =
+					(cui<<28)>>28; /* /!\ */
+			std::cout<<"            - initial_presentation_delay_minus_one: "<<
+					initial_presentation_delay_minus_one<<std::endl;
+		}
+		else{
+			unsigned int reserved = (cui<<28)>>28; /* /!\ */
+			std::cout<<"            - reserved: "<<reserved<<std::endl;
+		}
+
+		// configOBUs
+		std::cout<<"            - configOBUs:";
+		for(oi=0;oi<(bhsize.ui-3*4);oi++){
+			ica=fgetc(avifile); cui=(unsigned int)ica;
+			std::cout<<" "<<cui;
+		}
+		std::cout<<std::endl;
+		
+		//[af]
 	}
 	//---------------------------------------------------------------------
 	//[<META BOX]
