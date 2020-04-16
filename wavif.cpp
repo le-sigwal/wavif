@@ -11,7 +11,7 @@
  *                  AV1
  *                    https://aomediacodec.github.io/av1-avif/
  * Authors: Bagad Sigwal
- * Copyright: 2020 Sigwal.info/github
+ * Copyright: 2020 Sigwal.info/github - All Rights Reserved
  * Last modification: 31/03/2020
  * Version: 20.03
  *
@@ -30,7 +30,9 @@
  * SWL - 29/03/2020 - added avifinfo/itempropertiesbox
  *                    added avifinfo/itempropertycontainerbox
  *                    added avifinfo/imagespatialextents
- *                    added avifinfo/pixelaspectratio                    */
+ *                    added avifinfo/pixelaspectratio
+ * SWL - 31/03/2020 - added avifinfo/av1itemconfigurationproperty
+ *                    added avifinfo/itempropertyassociation             */
 //-------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------
@@ -564,8 +566,17 @@ int avifinfo(const char *filepath){
 			std::cout<<" "<<cui;
 		}
 		std::cout<<std::endl;
-		
-		//[af]
+		//
+		std::cout<<"        - Item Property Association"<<std::endl;
+		ica=fgetc(avifile); icb=fgetc(avifile); icc=fgetc(avifile); icd=fgetc(avifile);
+		cca=(char)ica; ccb=(char)icb; ccc=(char)icc; ccd=(char)icd;
+		bhsize.cr[0]=ccd; bhsize.cr[1]=ccc; bhsize.cr[2]=ccb; bhsize.cr[3]=cca;
+		std::cout<<"          - Box header size: "<<bhsize.ui<<std::endl;
+
+		ica=fgetc(avifile); icb=fgetc(avifile); icc=fgetc(avifile); icd=fgetc(avifile);
+		cca=(char)ica; ccb=(char)icb; ccc=(char)icc; ccd=(char)icd;
+		std::cout<<"          - Box header type: '"<<cca<<ccb<<ccc<<ccd<<"'"<<std::endl;
+
 	}
 	//---------------------------------------------------------------------
 	//[<META BOX]
